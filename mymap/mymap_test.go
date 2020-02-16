@@ -16,17 +16,41 @@ func TestMyMap_init_maps(t *testing.T) {
 	m := mymap.New()
 	assert.NotNil(m)
 
+	// number
 	n := m.NumbersMap()
+	t.Log(n)
+
+	who, phone := "max", "N/A"
+	if v, ok := n[who]; ok {
+		phone = v
+	}
 	assert.Equal(4, len(n))
+	assert.Equal("123566777", phone)
 
+	// customer
 	c := m.CustomeridMap()
+	t.Log(c)
+
 	assert.Equal(2, len(c))
+	productsBought := c[2]["a1"]
+	// 	2: {"a1": 12},
+	assert.Equal(12,productsBought)
 
+	// product
 	p := m.ProductMap()
-	assert.Equal(2, len(p))
+	t.Log(p)
 
+	assert.Equal(2, len(p))
+	assert.False(p[1])
+	assert.True(p[2])
+
+	// multi
 	mm := m.MultinumbersMap()
+	t.Log(mm)
+	// bruce second number
+	bruce2ndNo := mm["bruce"][1]
 	assert.Equal(3, len(mm))
+	assert.Equal("33",bruce2ndNo)
 
 }
 

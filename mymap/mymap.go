@@ -52,7 +52,6 @@ func (m *MyMaps) ProductMap() map[int]bool {
 		2: true,
 	}
 	fmt.Printf("numbers %#v \n", products)
-
 	return products
 }
 
