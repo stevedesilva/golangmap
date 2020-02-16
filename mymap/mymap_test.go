@@ -12,12 +12,21 @@ import (
 
 func TestMyMap_init_maps(t *testing.T) {
 	assert := assert.New(t)
+
 	m := mymap.New()
 	assert.NotNil(m)
 
-	nums := m.NumbersMap()
+	n := m.NumbersMap()
+	assert.Equal(4, len(n))
 
-	assert.Equal(4,len(nums))
+	c := m.CustomeridMap()
+	assert.Equal(2, len(c))
+
+	p := m.ProductMap()
+	assert.Equal(2, len(p))
+
+	mm := m.MultinumbersMap()
+	assert.Equal(3, len(mm))
 
 }
 
