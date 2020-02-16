@@ -15,6 +15,10 @@ func TestMyMap_init_maps(t *testing.T) {
 	m := mymap.New()
 	assert.NotNil(m)
 
+	nums := m.NumbersMap()
+
+	assert.Equal(4,len(nums))
+
 }
 
 // func TestInsertionSort_should_sort_sequence(t *testing.T) {
