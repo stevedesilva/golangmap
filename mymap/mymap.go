@@ -1,6 +1,10 @@
 package mymap
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"sort"
+)
 
 // // ---------------------------------------------------------
 // // EXERCISE: Warm-up
@@ -84,3 +88,94 @@ func (m *MyMaps) CustomeridMap() map[int]map[string]int {
 	return customerid
 
 }
+
+// Students example
+//
+//  Create a program that returns the students by the given
+//  Hogwarts house name (see the data below).
+//
+//  Print the students sorted by name.
+//
+//  "bobo" doesn't belong to Hogwarts, remove it by using
+//  the delete function.
+//
+//
+// RESTRICTIONS
+//
+//  + Add the following data to your map as is.
+//    Do not sort it manually and do not modify it.
+//
+//  + Slices in the map shouldn't be sorted (changed).
+//    HINT: Copy them.
+//
+//
+// EXPECTED OUTPUT
+//
+//  go run main.go
+//
+//  Please type a Hogwarts house name.
+//
+//
+//  go run main.go bobo
+//
+//  Sorry. I don't know anything about "bobo".
+//
+//
+//  go run main.go hufflepuf
+//
+//  ~~~ hufflepuf students ~~~
+//
+//        + diggory
+//        + helga
+//        + scamander
+//        + wenlock
+//
+// ---------------------------------------------------------
+func (m *MyMaps) Students(args []string) ([]string, error) {
+
+	// House        Student Name
+	// ---------------------------
+	// gryffindor   weasley
+	// gryffindor   hagrid
+	// gryffindor   dumbledore
+	// gryffindor   lupin
+	// hufflepuf    wenlock
+	// hufflepuf    scamander
+	// hufflepuf    helga
+	// hufflepuf    diggory
+	// ravenclaw    flitwick
+	// ravenclaw    bagnold
+	// ravenclaw    wildsmith
+	// ravenclaw    montmorency
+	// slytherin    horace
+	// slytherin    nigellus
+	// slytherin    higgs
+	// slytherin    scorpius
+	// bobo         wizardry
+	// bobo         unwanted
+
+	house := make(map[string][]string, len(args))
+
+	house["gryffindor"] = []string{"weasley", "hagrid", "dumbledore", "lupin"}
+	house["hufflepuf"] = []string{"wenlock", "scamander", "helga", "diggory"}
+	house["ravenclaw"] = []string{"flitwick", "bagnold", "wildsmith", "montmorency"}
+	house["slytherin"] = []string{"horace", "nigellus", "higgs", "scorpius"}
+	house["bobo"] = []string{"wizardry", "unwanted"}
+
+	delete(house, "bobo")
+
+	if len(args) < 1 {
+		return nil, ErrMyMapNoArg
+	}
+
+	in := args[0]
+
+	clone := append([]string(nil), house[in]...)
+
+	sort.Strings(clone)
+
+	return clone, nil
+}
+
+// ErrMyMapNoArg error
+var ErrMyMapNoArg = errors.New("Please type a Hogwarts house name")
