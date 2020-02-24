@@ -59,7 +59,7 @@ func TestMyMap_Student_should_show_message_when_no_args(t *testing.T) {
 	m := mymap.New()
 	data, err := m.Students(nil)
 	if err == nil {
-		t.Errorf("Should have received ErrMyMapNoArg: %s",data)
+		t.Errorf("Should have received ErrMyMapNoArg: %s", data)
 	}
 }
 
